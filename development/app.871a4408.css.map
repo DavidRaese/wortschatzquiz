@@ -1,1 +1,1 @@
-{"version":3,"sources":["_heading.scss"],"names":[],"mappings":"AAAA;EACE;EACA","file":"app.871a4408.css","sourceRoot":"..\\public","sourcesContent":["h1 {\r\n  background-color: teal;\r\n  color: white;\r\n}"]}
+{"version":3,"sources":["_heading.scss","style.scss"],"names":[],"mappings":"AAAA;EACE;EACA;EACA;;;ACDF;EACE","file":"app.871a4408.css","sourceRoot":"..\\public","sourcesContent":["h1 {\r\n  background-color: teal;\r\n  color: white;\r\n  text-align: center;\r\n}","@import \"./heading\";\r\n\r\nbody {\r\n  padding: 0 30px;\r\n}\r\n"]}
