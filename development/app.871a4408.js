@@ -1222,7 +1222,66 @@ var questionStrings = ["Frage 1", "Frage 2", "Frage 3", "Frage 4", "Frage 5", "F
 exports.questionStrings = questionStrings;
 var paths = ["./question1img1.jpeg", "./question1img2.jpeg", "./question1img3.jpeg", "./question1img4.jpeg", "./question2img1.jpeg", "./question2img2.jpeg", "./question2img3.jpeg", "./question2img4.jpeg", "./question3img1.jpeg", "./question3img2.jpeg", "./question3img3.jpeg", "./question3img4.jpeg", "./question4img1.jpeg", "./question4img2.jpeg", "./question4img3.jpeg", "./question4img4.jpeg", "./question5img1.jpeg", "./question5img2.jpeg", "./question5img3.jpeg", "./question5img4.jpeg", "./question6img1.jpeg", "./question6img2.jpeg", "./question6img3.jpeg", "./question6img4.jpeg"];
 exports.paths = paths;
-},{}],"../app.js":[function(require,module,exports) {
+},{}],"../scripts/quiz/QuizView.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime-corejs2/helpers/classCallCheck"));
+
+var _createClass2 = _interopRequireDefault(require("@babel/runtime-corejs2/helpers/createClass"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var QuizView = /*#__PURE__*/function () {
+  function QuizView() {
+    (0, _classCallCheck2.default)(this, QuizView);
+    this._app = this._getElement("#app");
+    this._app.innerHTML = "\n      <div class=\"quiz__container\">\n        <h3 class=\"quiz__question\" ></h3>\n        <div class=\"quiz__images\"></div>\n      </div>\n    ";
+    this._question = this._getElement(".quiz__question");
+    this._imageContainer = this._getElement(".quiz__image");
+  }
+
+  (0, _createClass2.default)(QuizView, [{
+    key: "displayQuestion",
+    value: function displayQuestion(question) {
+      var _this = this;
+
+      this._question.textContent = question.questionStr;
+      this._imageContainer.innerHTML = "";
+      question.images.forEach(function (img) {
+        // todo: creat function for this
+        var imgEl = _this._createElement("img");
+
+        imgEl.setAttribute("src", img.pathToImage);
+
+        _this._imageContainer.appendChild(imgEl); // todo: add eventhandler
+
+      });
+    } //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    //                     Ineternal Methodes
+    //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+  }, {
+    key: "_getElement",
+    value: function _getElement(selector) {
+      return document.querySelector(selector);
+    }
+  }, {
+    key: "_createElement",
+    value: function _createElement(tag) {
+      return document.createElement(tag);
+    }
+  }]);
+  return QuizView;
+}();
+
+var _default = QuizView;
+exports.default = _default;
+},{"@babel/runtime-corejs2/helpers/classCallCheck":"../node_modules/@babel/runtime-corejs2/helpers/classCallCheck.js","@babel/runtime-corejs2/helpers/createClass":"../node_modules/@babel/runtime-corejs2/helpers/createClass.js"}],"../app.js":[function(require,module,exports) {
 "use strict";
 
 require("./public/style.scss");
@@ -1234,6 +1293,8 @@ var _Question = _interopRequireDefault(require("./scripts/quiz/Question"));
 var _Image = _interopRequireDefault(require("./scripts/quiz/Image"));
 
 var _dummyData = require("./scripts/utils/dummyData");
+
+var _QuizView = _interopRequireDefault(require("./scripts/quiz/QuizView"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1258,7 +1319,7 @@ var questions = _dummyData.questionStrings.map(function (str, count) {
   images[randNum].isCorrectAnswere = true;
   return new _Question.default(str, images);
 }); //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-// Create Test Questions
+// Event handler functions
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
@@ -1282,7 +1343,9 @@ var firstQuestion = function firstQuestion() {
 btnPrev.addEventListener("click", prevQuestion);
 btnNext.addEventListener("click", nextQuestion);
 firstQuestion();
-},{"./public/style.scss":"style.scss","./scripts/quiz/Quiz":"../scripts/quiz/Quiz.js","./scripts/quiz/Question":"../scripts/quiz/Question.js","./scripts/quiz/Image":"../scripts/quiz/Image.js","./scripts/utils/dummyData":"../scripts/utils/dummyData.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+var quizView = new _QuizView.default();
+app.innerHTML = quizView.htmlString;
+},{"./public/style.scss":"style.scss","./scripts/quiz/Quiz":"../scripts/quiz/Quiz.js","./scripts/quiz/Question":"../scripts/quiz/Question.js","./scripts/quiz/Image":"../scripts/quiz/Image.js","./scripts/utils/dummyData":"../scripts/utils/dummyData.js","./scripts/quiz/QuizView":"../scripts/quiz/QuizView.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -1310,7 +1373,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52947" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56760" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

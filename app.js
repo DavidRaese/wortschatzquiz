@@ -4,6 +4,7 @@ import Question from "./scripts/quiz/Question";
 import Image from "./scripts/quiz/Image";
 
 import { questionStrings, paths } from "./scripts/utils/dummyData";
+import QuizView from "./scripts/quiz/QuizView";
 
 const app = document.querySelector("#app");
 const btnPrev = document.querySelector("#btnPrev");
@@ -29,8 +30,9 @@ const questions = questionStrings.map((str, count) => {
   images[randNum].isCorrectAnswere = true;
   return new Question(str, images);
 });
+
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-// Create Test Questions
+// Event handler functions
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 const quiz = new Quiz(questions);
@@ -54,3 +56,6 @@ btnPrev.addEventListener("click", prevQuestion);
 btnNext.addEventListener("click", nextQuestion);
 
 firstQuestion();
+const quizView = new QuizView();
+
+app.innerHTML = quizView.htmlString;
