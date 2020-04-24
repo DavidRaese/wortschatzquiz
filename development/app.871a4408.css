@@ -4,8 +4,27 @@ h1 {
   text-align: center;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 body {
   padding: 0 30px;
+}
+
+img {
+  height: 128px;
+  width: 128px;
+  cursor: pointer;
+}
+img:hover {
+  border: 5px solid steelblue;
+}
+img:not(:last-child) {
+  margin-right: 10px;
+}
+img.selected {
+  border: 5px solid steelblue;
 }
 
 /*# sourceMappingURL=/app.871a4408.css.map */

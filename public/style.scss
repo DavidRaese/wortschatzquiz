@@ -1,5 +1,27 @@
 @import "./heading";
 
+* {
+  box-sizing: border-box;
+}
+
 body {
   padding: 0 30px;
+}
+
+img {
+  height: 128px;
+  width: 128px;
+  cursor: pointer;
+
+  &:hover {
+    border: 5px solid steelblue;
+  }
+
+  &:not(:last-child) {
+    margin-right: 10px;
+  }
+
+  &.selected {
+    border: 5px solid steelblue;
+  }
 }

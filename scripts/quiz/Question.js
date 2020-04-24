@@ -11,6 +11,13 @@ class Question {
   setWasAnswerdCorrectly(bool) {
     this.wasAnswerdCorrectly = bool;
   }
+
+  setSelectedImageTrue(imgNr) {
+    // 1. unset all images
+    this.images.forEach((img) => (img.isSelected = false));
+    // 2. set selected image
+    this.images[imgNr].isSelected = true;
+  }
 }
 
 export default Question;
